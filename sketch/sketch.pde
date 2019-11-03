@@ -123,10 +123,11 @@ boolean hasColliedUp(int[][] obsArray) {
   for(int i = 0; i < obsArray.length; i++){
     if(starting_y >= obsPoints[i][1] && starting_y <= obsPoints[i][1] + OBS_HEIGHT){
       if((starting_x + TOTAL_WIDTH >= obsPoints[i][0] && starting_x + TOTAL_WIDTH <= obsPoints[i][0] + OBS_WIDTH) 
-          || (starting_x <= obsPoints[i][0] + OBS_WIDTH && starting_x >= obsPoints[i][0])){
+          || (starting_x <= obsPoints[i][0] + OBS_WIDTH && starting_x >= obsPoints[i][0]))
+          {
             return true;
           }
-    }
+      }
   }
   return false;
 }
