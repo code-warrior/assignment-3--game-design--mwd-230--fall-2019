@@ -1,6 +1,6 @@
 void setup() {
   size(1280, 800);
-  bg_F = loadImage("img/bg-f.jpg");
+  bg = loadImage("img/bg-f.jpg");
   animatedCreature();
   stationaryObjects();
 }

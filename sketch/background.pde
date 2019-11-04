@@ -21,7 +21,7 @@ void bgChecker() {
 
 void bgChanger() {
   if(previous_key_press == 70) {
-    background(bg_F); 
+    background(bg);
    } else if(previous_key_press == 83) {
        bgPrimitives();
      }

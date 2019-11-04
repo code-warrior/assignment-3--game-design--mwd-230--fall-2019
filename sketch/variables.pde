@@ -5,7 +5,7 @@ int BODY_HEIGHT = 100;
 int BODY_WIDTH = 100;
 int SPEED = 10;
 int previous_key_press = 0;
-PImage bg_F;
+PImage bg;
 PImage[] character = new PImage[8];
 
 int creatureW =120;
