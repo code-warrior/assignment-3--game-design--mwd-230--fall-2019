@@ -2,7 +2,7 @@ void bgPrimitives() {
   background(125);
   for (int i = 0; i < width; i += 50) {
     for (int j = 0; j < height; j += 120) {
-      fill( random(255), random(255), random(255), random(255)); 
+      fill( random(255), random(255), random(255), random(255));
       circle(i, j+35, 100);
     }
   }
