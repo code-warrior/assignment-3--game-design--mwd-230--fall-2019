@@ -1,3 +1,9 @@
+/**
+ * Constants representing ASCII code values
+ */
+final int S_KEY = 83;
+final int F_KEY = 70;
+
 int start_x = 0;
 int start_y = 670;
 int HEAD_WIDTH_HEIGHT = 120;
