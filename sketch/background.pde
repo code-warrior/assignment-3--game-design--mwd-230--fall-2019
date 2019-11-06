@@ -8,6 +8,10 @@ void renderBGCircles() {
   }
 }
 
+void renderBG() {
+  background(bg);
+}
+
 //Check for if 'F' or 'S' key are previously pressed
 void bgChecker() {
   if(keyPressed) {
@@ -21,7 +25,7 @@ void bgChecker() {
 
 void bgChanger() {
   if(previous_key_press == F_KEY) {
-    background(bg);
+    renderBG();
    } else if(previous_key_press == S_KEY) {
       renderBGCircles();
      }
