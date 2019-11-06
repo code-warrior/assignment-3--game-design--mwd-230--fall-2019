@@ -12,17 +12,17 @@ void bgPrimitives() {
 void bgChecker() {
   if(keyPressed) {
       if(key == 'f' || key == 'F') {
-        previous_key_press = 70;
+        previous_key_press = F_KEY;
       } else if(key == 's' || key == 'S') {
-          previous_key_press = 83;
+          previous_key_press = S_KEY;
         }
     }
 }
 
 void bgChanger() {
-  if(previous_key_press == 70) {
+  if(previous_key_press == F_KEY) {
     background(bg);
-   } else if(previous_key_press == 83) {
        bgPrimitives();
+   } else if(previous_key_press == S_KEY) {
      }
 }
