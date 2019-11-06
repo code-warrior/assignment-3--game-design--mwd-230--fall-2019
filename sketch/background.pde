@@ -1,4 +1,4 @@
-void bgPrimitives() {
+void renderBGCircles() {
   background(125);
   for (int i = 0; i < width; i += 50) {
     for (int j = 0; j < height; j += 120) {
@@ -22,7 +22,7 @@ void bgChecker() {
 void bgChanger() {
   if(previous_key_press == F_KEY) {
     background(bg);
-       bgPrimitives();
    } else if(previous_key_press == S_KEY) {
+      renderBGCircles();
      }
 }
