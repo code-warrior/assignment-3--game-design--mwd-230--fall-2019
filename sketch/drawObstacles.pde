@@ -11,7 +11,7 @@ int[] objectB = new int[5];
 //Creating objects in random position each run
 void stationaryObjects() {
 
-  for (int i = 0; i < 2; i++) {
+  for (int i = 0; i < 5; i++) {
     int index1 = int(random(objectX.length));
     int index2 = int(random(objectY.length));
     int index3 = int(random(objectW.length));
