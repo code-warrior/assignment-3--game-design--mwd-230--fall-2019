@@ -2,15 +2,22 @@ import java.util.Arrays;
 /*
   Collision detection!
 */
-public boolean firstBackground = true;
 PImage bg;
 PImage obs;
+
+public boolean firstBackground = true;
+
 public final static int HEAD_WIDTH_HEIGHT = 75;
 public final static int BODY_WIDTH = 250;
 public final static int BODY_HEIGHT = 150;
 public final static int MOVEMENT_SPEED = 10;
 public final static int TRUE_GRAY = (255/2);
 public final static int WHITE = 255;
+public final static int TOTAL_WIDTH = (50 + BODY_WIDTH + HEAD_WIDTH_HEIGHT);
+public final static int TOTAL_HEIGHT = (50 + BODY_HEIGHT);
+public final static int OBS_WIDTH = 100;
+public final static int OBS_HEIGHT = 100;
+
 public int[][] obsPoints = {
   {0,0},
   {260,160},
@@ -18,10 +25,7 @@ public int[][] obsPoints = {
   {770, 480},
   {1020, 640}
 };
-final int TOTAL_WIDTH = (50 + BODY_WIDTH + HEAD_WIDTH_HEIGHT);
-final int TOTAL_HEIGHT = (50 + BODY_HEIGHT);
-final int OBS_WIDTH = 100;
-final int OBS_HEIGHT = 100;
+
 public int starting_x = 20;
 public int starting_y = 800 - TOTAL_HEIGHT;
 
@@ -47,7 +51,7 @@ void setBackground() {
     background(255);
   }
   else {
-    background(bg); 
+    background(bg);
   }
 }
 
@@ -57,20 +61,20 @@ void drawCreature(int point_x, int point_y) {
     //Body
     fill(TRUE_GRAY);
     rect(point_x, point_y, BODY_WIDTH, BODY_HEIGHT);
-    
+
     //Head
     fill(TRUE_GRAY);
     rect(point_x+200+HEAD_WIDTH_HEIGHT/2, point_y + BODY_WIDTH/3 - HEAD_WIDTH_HEIGHT/2, HEAD_WIDTH_HEIGHT, HEAD_WIDTH_HEIGHT);
-    
+
     //Tusks
     fill(WHITE);
     triangle(
-        point_x+200+HEAD_WIDTH_HEIGHT, point_y + BODY_WIDTH/3 - HEAD_WIDTH_HEIGHT/2 + HEAD_WIDTH_HEIGHT-20, 
-        point_x+200+HEAD_WIDTH_HEIGHT, point_y + BODY_WIDTH/3 - HEAD_WIDTH_HEIGHT/2 + HEAD_WIDTH_HEIGHT, 
+        point_x+200+HEAD_WIDTH_HEIGHT, point_y + BODY_WIDTH/3 - HEAD_WIDTH_HEIGHT/2 + HEAD_WIDTH_HEIGHT-20,
+        point_x+200+HEAD_WIDTH_HEIGHT, point_y + BODY_WIDTH/3 - HEAD_WIDTH_HEIGHT/2 + HEAD_WIDTH_HEIGHT,
         point_x+200+HEAD_WIDTH_HEIGHT+100, point_y + BODY_WIDTH/3 - HEAD_WIDTH_HEIGHT/2 + HEAD_WIDTH_HEIGHT+20);
     triangle(
-        point_x+200+HEAD_WIDTH_HEIGHT, point_y + BODY_WIDTH/3 - HEAD_WIDTH_HEIGHT/2 + HEAD_WIDTH_HEIGHT-20, 
-        point_x+200+HEAD_WIDTH_HEIGHT, point_y + BODY_WIDTH/3 - HEAD_WIDTH_HEIGHT/2 + HEAD_WIDTH_HEIGHT, 
+        point_x+200+HEAD_WIDTH_HEIGHT, point_y + BODY_WIDTH/3 - HEAD_WIDTH_HEIGHT/2 + HEAD_WIDTH_HEIGHT-20,
+        point_x+200+HEAD_WIDTH_HEIGHT, point_y + BODY_WIDTH/3 - HEAD_WIDTH_HEIGHT/2 + HEAD_WIDTH_HEIGHT,
         point_x+200+HEAD_WIDTH_HEIGHT+100, point_y + BODY_WIDTH/3 - HEAD_WIDTH_HEIGHT/2 + HEAD_WIDTH_HEIGHT-20);
 
     //Eye
@@ -94,22 +98,27 @@ void draw() {
 }
 
 boolean hasColliedLeft(int[][] obsArray) {
+  boolean status = false;
+
   for(int i = 0; i < obsArray.length; i++){
-    if(starting_x + TOTAL_WIDTH >= obsPoints[i][0] && starting_x + TOTAL_WIDTH <= obsPoints[i][0] + OBS_WIDTH){
-      if((starting_y >= obsPoints[i][1] && starting_y <= obsPoints[i][1] + OBS_HEIGHT) 
+    if((starting_x + TOTAL_WIDTH >= obsPoints[i][0]) &&
+       (starting_x + TOTAL_WIDTH <= obsPoints[i][0] + OBS_WIDTH)){
+      if((starting_y >= obsPoints[i][1] && starting_y <= obsPoints[i][1] + OBS_HEIGHT)
           || (starting_y + TOTAL_HEIGHT <= obsPoints[i][1] + TOTAL_HEIGHT && starting_y + TOTAL_HEIGHT >= obsPoints[i][1]))
       {
-        return true;
+        status = true;
+        break;
       }
     }
   }
-  return false;
+
+  return status;
 }
 
 boolean hasColliedRight(int[][] obsArray) {
   for(int i = 0; i < obsArray.length; i++){
     if(starting_x <= obsPoints[i][0] + OBS_WIDTH && starting_x >= obsPoints[i][0]){
-      if((starting_y >= obsPoints[i][1] && starting_y <= obsPoints[i][1] + OBS_HEIGHT) 
+      if((starting_y >= obsPoints[i][1] && starting_y <= obsPoints[i][1] + OBS_HEIGHT)
           || (starting_y + TOTAL_HEIGHT <= obsPoints[i][1] + TOTAL_HEIGHT && starting_y + TOTAL_HEIGHT >= obsPoints[i][1]))
       {
         return true;
@@ -122,7 +131,7 @@ boolean hasColliedRight(int[][] obsArray) {
 boolean hasColliedUp(int[][] obsArray) {
   for(int i = 0; i < obsArray.length; i++){
     if(starting_y >= obsPoints[i][1] && starting_y <= obsPoints[i][1] + OBS_HEIGHT){
-      if((starting_x + TOTAL_WIDTH >= obsPoints[i][0] && starting_x + TOTAL_WIDTH <= obsPoints[i][0] + OBS_WIDTH) 
+      if((starting_x + TOTAL_WIDTH >= obsPoints[i][0] && starting_x + TOTAL_WIDTH <= obsPoints[i][0] + OBS_WIDTH)
           || (starting_x <= obsPoints[i][0] + OBS_WIDTH && starting_x >= obsPoints[i][0]))
           {
             return true;
@@ -135,7 +144,7 @@ boolean hasColliedUp(int[][] obsArray) {
 boolean hasColliedDown(int[][] obsArray) {
   for(int i = 0; i < obsArray.length; i++){
     if(starting_y + TOTAL_HEIGHT >= obsPoints[i][1] && starting_y + TOTAL_HEIGHT <= obsPoints[i][1] + OBS_HEIGHT){
-      if((starting_x + TOTAL_WIDTH >= obsPoints[i][0] && starting_x + TOTAL_WIDTH <= obsPoints[i][0] + OBS_WIDTH) 
+      if((starting_x + TOTAL_WIDTH >= obsPoints[i][0] && starting_x + TOTAL_WIDTH <= obsPoints[i][0] + OBS_WIDTH)
           || (starting_x <= obsPoints[i][0] + OBS_WIDTH && starting_x >= obsPoints[i][0])){
             return true;
           }
@@ -162,7 +171,7 @@ void keyReleased() {
   }
   //Debugging
   else {
-    
+
     //left up right down
     // 37  38 39    40
   }
